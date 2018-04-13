@@ -35,11 +35,7 @@ func main() {
 	defer writer.Flush()
 
 	// Preparing dir from command-line flag
-	dir := *appendParam
-	if dir != "./" && strings.Contains(dir, "/") {
-		fmt.Printf("Only support one level of directory, or remove \"/\" in the end of directory\n")
-		return
-	}
+	dir := filepath.Clean(*appendParam)
 
 	// Preparing data from directory names
 	var data [][]string
