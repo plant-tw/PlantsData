@@ -20,6 +20,6 @@ See the project [plant-tw/models_plant](https://github.com/plant-tw/models_plant
 
 ## License
 
-The program is licensed under GNU Affero General Public License v3.0, check the [LICENSE](https://github.com/plant-tw/PlantsCam-iOS/blob/master/LICENSE) file. 
+The program is licensed under GNU Affero General Public License v3.0. Check the [LICENSE](https://github.com/plant-tw/PlantsCam-iOS/blob/master/LICENSE) file.
 
-The collected training data are licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit [https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/).
+The collected training data are licensed separately. Check the LICENSE file in each project folder.
