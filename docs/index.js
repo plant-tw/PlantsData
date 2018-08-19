@@ -1,27 +1,37 @@
 var doc = function() {
+  var obj;
   var show = function(key) {
     if (typeof(key) !== "string") {
       document.getElementsByClassName("name")[0].textContent = "Error: not string type";
-      document.getElementsByClassName("image")[0].src = "";
       document.getElementsByClassName("description")[0].textContent = "";
+      document.getElementsByClassName("image")[0].src = "";
       return;
     }
     loadJSON(function(response) {
       var data = JSON.parse(response);
-      var obj = data[key];
+      obj = data[key];
       if (obj === undefined) {
         document.getElementsByClassName("name")[0].textContent = "Error: not found";
-        document.getElementsByClassName("image")[0].src = "";
         document.getElementsByClassName("description")[0].textContent = "";
+        document.getElementsByClassName("image")[0].src = "";
         return;
       }
       var name = key;
-      var img = obj.img;
       var txt = obj.txt;
       document.getElementsByClassName("name")[0].textContent = name;
-      document.getElementsByClassName("image")[0].src = img;
       document.getElementsByClassName("description")[0].textContent = txt;
+      document.getElementsByClassName("image")[0].src = "";
     });
+  };
+
+  var loadImages = function() {
+    if (obj === undefined) {
+      document.getElementsByClassName("name")[0].textContent = "Error: not found";
+      document.getElementsByClassName("description")[0].textContent = "";
+      document.getElementsByClassName("image")[0].src = "";
+      return;
+    }
+    document.getElementsByClassName("image")[0].src = obj.img;
   };
 
   // See: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
@@ -39,6 +49,7 @@ var doc = function() {
  };
 
   return {
+    loadImages: loadImages,
     show: show
   };
 }();
