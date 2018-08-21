@@ -1,16 +1,22 @@
 var doc = (function () {
     "use strict";
+    var dataString;
     var obj;
 
     // See: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
     var loadJSON = function (callback) {
+        if (dataString !== undefined) {
+            callback(dataString);
+            return;
+        }
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
         xobj.open("GET", "data.json", true);
         xobj.onreadystatechange = function () {
-            if (xobj.readyState === 4 && xobj.status === "200") {
+            if (xobj.readyState === 4 && xobj.status === 200) {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-                callback(xobj.responseText);
+                dataString = xobj.responseText;
+                callback(dataString);
             }
         };
         xobj.send(null);
@@ -25,9 +31,9 @@ var doc = (function () {
             document.getElementsByClassName("image")[0].src = "";
             return;
         }
-        loadJSON(function (response) {
-            var data = JSON.parse(response);
-            obj = data[key];
+        loadJSON(function (dataString) {
+            var dataDict = JSON.parse(dataString);
+            obj = dataDict[key];
             if (obj === undefined) {
                 errMsg = "Error: not found";
                 document.getElementsByClassName("name")[0].textContent = errMsg;
