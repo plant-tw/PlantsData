@@ -9,17 +9,17 @@ var doc = (function () {
             callback(dataString);
             return;
         }
-        var xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-        xobj.open("GET", "data.json", true);
-        xobj.onreadystatechange = function () {
-            if (xobj.readyState === 4 && xobj.status === 200) {
+        var request = new XMLHttpRequest();
+        request.overrideMimeType("application/json");
+        request.open("GET", "data.json", true);
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-                dataString = xobj.responseText;
+                dataString = request.responseText;
                 callback(dataString);
             }
         };
-        xobj.send(null);
+        request.send(null);
     };
 
     var show = function (key) {
@@ -42,7 +42,7 @@ var doc = (function () {
                 return;
             }
             var name = key;
-            var txt = obj.txt;
+            var txt = obj.Txt;
             document.getElementsByClassName("name")[0].textContent = name;
             document.getElementsByClassName("description")[0].textContent = txt;
             document.getElementsByClassName("image")[0].src = "";
@@ -58,7 +58,7 @@ var doc = (function () {
             document.getElementsByClassName("image")[0].src = "";
             return;
         }
-        document.getElementsByClassName("image")[0].src = obj.img;
+        document.getElementsByClassName("image")[0].src = obj.Img;
     };
 
     return {

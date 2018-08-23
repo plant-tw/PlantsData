@@ -12,7 +12,7 @@ Currently, here's how we organize and label collected data:
 2. Run `./walk` to create `result.csv`. Afterwards, simply run `./walk -a xxxxxxxx` to add the new folder xxxxxxxx to append to `result.csv`. (You need to run `go build walk.go` before using it)
 3. Label the data in `result.csv` and commit it.
 
-Plus, run `./total` to see total kinds of plants labeled.
+Plus, run `./total` to see total classes labeled. When new classes are added, run `./total -o xxxxxxxx` to create or update the doc. See more in [doc/](https://github.com/plant-tw/PlantsData/tree/master/docs) directory.
 
 ## Training
 
