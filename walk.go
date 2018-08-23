@@ -35,24 +35,25 @@ func main() {
 	defer writer.Flush()
 
 	// Preparing dir from command-line flag
-	dir := filepath.Clean(*appendParam)
+	rootDir := filepath.Clean(*appendParam)
 
 	// Preparing data from directory names
 	var data [][]string
-	err = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+	err = filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			fmt.Printf("prevent panic by handling failure accessing a path %q: %v\n", dir, err)
+			fmt.Printf("prevent panic by handling failure accessing a path %q: %v\n", rootDir, err)
 			return err
 		}
 		// predefined directory hierarchy
-		if info.IsDir() && path != "./" && strings.Contains(path, "/") {
+		// We only add subdirectories, excluding rootDir
+		if info.IsDir() && !strings.Contains(rootDir, info.Name()) {
 			element := []string{path, ""}
 			data = append(data, element)
 		}
 		return nil
 	})
 	if err != nil {
-		fmt.Printf("error walking the path %q: %v\n", dir, err)
+		fmt.Printf("error walking the path %q: %v\n", rootDir, err)
 		return
 	}
 
