@@ -28,34 +28,35 @@ var doc = (function () {
             errMsg = "Error: not string type";
             document.getElementsByClassName("name")[0].textContent = errMsg;
             document.getElementsByClassName("description")[0].textContent = "";
-            document.getElementsByClassName("image")[0].src = "";
+            document.getElementsByClassName("image")[0].src = "#";
             return;
         }
         loadJSON(function (dataString) {
             var dataDict = JSON.parse(dataString);
             obj = dataDict[key];
             if (obj === undefined) {
-                errMsg = "Error: not found";
+                errMsg = "我不認得或沒看到花...";
                 document.getElementsByClassName("name")[0].textContent = errMsg;
                 document.getElementsByClassName("description")[0].textContent = "";
-                document.getElementsByClassName("image")[0].src = "";
+                document.getElementsByClassName("image")[0].src = "#";
                 return;
             }
             var name = key;
             var txt = obj.Txt;
             document.getElementsByClassName("name")[0].textContent = name;
             document.getElementsByClassName("description")[0].textContent = txt;
-            document.getElementsByClassName("image")[0].src = "";
+            document.getElementsByClassName("image")[0].src = "#";
         });
     };
 
     var loadImages = function () {
-        var errMsg = "";
+        // TODO: developer mode
+        // var errMsg = "";
         if (obj === undefined) {
-            errMsg = "Error: run show() before loadImages()";
-            document.getElementsByClassName("name")[0].textContent = errMsg;
+            // errMsg = "Error: run show() before loadImages()";
+            // document.getElementsByClassName("name")[0].textContent = errMsg;
             document.getElementsByClassName("description")[0].textContent = "";
-            document.getElementsByClassName("image")[0].src = "";
+            document.getElementsByClassName("image")[0].src = "#";
             return;
         }
         document.getElementsByClassName("image")[0].src = obj.Img;
