@@ -1,1 +1,1 @@
-The data in this folder are created by Enos Chou, Ching Mei Lee, Irene Zheng, Shun-Ting Huang, Chia-Yu Chen. Licensed under the [Creative Commons Attribution-NonCommercial 4.0 International ](https://creativecommons.org/licenses/by-nc/4.0/).
+The data in this folder are created by Enos Chou, Ching Mei Lee, Irene Zheng, Shun-Ting Huang, Chia-Yu Chen, [Taiwan AI Academy](http://aiacademy.tw). Licensed under the [Creative Commons Attribution-NonCommercial 4.0 International ](https://creativecommons.org/licenses/by-nc/4.0/).
