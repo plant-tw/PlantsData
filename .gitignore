@@ -1,3 +1,5 @@
 # Data directories start with date number
 # And will not be included in git repository
 [0-9]*
+Bauhinia/
+!Bauhinia/LICENSE.md
