@@ -4,7 +4,8 @@ h1 {
 
 p.description {
   /* Temp solution for multiline: https://stackoverflow.com/a/33052216/3796488 */
-  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
   line-height: 1.5;
 }
 
