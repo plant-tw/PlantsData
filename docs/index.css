@@ -1,6 +1,13 @@
 h1 {
   text-align: center;
 }
+
+p.description {
+  /* Temp solution for multiline: https://stackoverflow.com/a/33052216/3796488 */
+  white-space: pre;
+  line-height: 1.5;
+}
+
 img.image {
   display: block;
   margin: 0 auto;
