@@ -2,6 +2,7 @@ var doc = (function () {
     "use strict";
     var dataString;
     var obj;
+    var type;
 
     // See: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
     var loadJSON = function (callback) {
@@ -9,9 +10,18 @@ var doc = (function () {
             callback(dataString);
             return;
         }
+	var urlParams = new URLSearchParams(window.location.search);
+	var dataLocation;
+	if (urlParams.get("type") === "swcp") {
+	  type = "swcp";
+	  dataLocation = "swcp.json";
+	} else {
+	  type = "daan-park";
+	  dataLocation = "data.json";
+        }
         var request = new XMLHttpRequest();
         request.overrideMimeType("application/json");
-        request.open("GET", "data.json", true);
+        request.open("GET", dataLocation, true);
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -35,7 +45,11 @@ var doc = (function () {
             var dataDict = JSON.parse(dataString);
             obj = dataDict[key];
             if (obj === undefined) {
-                errMsg = "我不認得或沒看到花...";
+	        if (type === "swcp") {
+		  errMsg = "無法辨識或非水土保持植物"
+		} else {
+                  errMsg = "我不認得或沒看到花...";
+		}
                 document.getElementsByClassName("name")[0].textContent = errMsg;
                 document.getElementsByClassName("description")[0].textContent = "";
                 document.getElementsByClassName("image")[0].src = "#";
