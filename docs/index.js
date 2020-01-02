@@ -3,6 +3,8 @@ var doc = (function () {
     var dict;
     var obj;
     var type;
+    var array = [];
+    var timerID;
 
     // See: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
     var loadJSON = function (callback) {
@@ -54,15 +56,43 @@ var doc = (function () {
                 document.getElementsByClassName("image")[0].src = "#";
                 return;
             }
-            var name = key;
-            var txt = obj.Txt;
-            document.getElementsByClassName("name")[0].textContent = name;
-            document.getElementsByClassName("description")[0].textContent = txt;
-            document.getElementsByClassName("image")[0].src = "#";
+            // push() is faster than unshift()
+            // See: https://stackoverflow.com/a/26370620/3796488
+            array.push(key);
+            if (timerID === undefined) {
+              timerID = window.setInterval(showResult, 3000);
+            }
         });
+    }
+
+    var showResult = function () {
+        var slicedArray = array.slice(-10);
+        var countMap = {};
+        var maxElement = slicedArray[0];
+        var maxCount = 1;
+        for (var i = 0; i < slicedArray.length; i++) {
+            var element = slicedArray[i];
+            if (countMap[element] === undefined) {
+                countMap[element] = 1;
+            } else {
+                countMap[element] += 1;
+            }
+            if (countMap[element] > maxCount) {
+                maxElement = element;
+                maxCount = countMap[element];
+            }
+        }
+        var name = maxElement;
+        obj = dict[maxElement];
+        var txt = obj.Txt;
+        document.getElementsByClassName("name")[0].textContent = name;
+        document.getElementsByClassName("description")[0].textContent = txt;
+        document.getElementsByClassName("image")[0].src = "#";
     };
 
     var loadImages = function () {
+        window.clearInterval(timerID);
+        timerID = undefined;
         // TODO: developer mode
         // var errMsg = "";
         if (obj === undefined) {
