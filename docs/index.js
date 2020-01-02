@@ -1,13 +1,13 @@
 var doc = (function () {
     "use strict";
-    var dataString;
+    var dict;
     var obj;
     var type;
 
     // See: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
     var loadJSON = function (callback) {
-        if (dataString !== undefined) {
-            callback(dataString);
+        if (dict !== undefined) {
+            callback(dict);
             return;
         }
 	var urlParams = new URLSearchParams(window.location.search);
@@ -25,8 +25,8 @@ var doc = (function () {
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-                dataString = request.responseText;
-                callback(dataString);
+                dict = JSON.parse(request.responseText);
+                callback(dict);
             }
         };
         request.send(null);
@@ -41,9 +41,8 @@ var doc = (function () {
             document.getElementsByClassName("image")[0].src = "#";
             return;
         }
-        loadJSON(function (dataString) {
-            var dataDict = JSON.parse(dataString);
-            obj = dataDict[key];
+        loadJSON(function (dict) {
+            obj = dict[key];
             if (obj === undefined) {
 	        if (type === "swcp") {
 		  errMsg = "無法辨識或非水土保持植物"
